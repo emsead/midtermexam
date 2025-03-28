@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,71 +8,58 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            font-size: 12px;
+            font-size: 12px; 
+            background-color: #f4f4f4;
         }
-
         h1 {
-            font-size: 40px;
-            margin: 0;
+            font-size: 32px;
         }
-
         h2 {
             font-size: 24px;
-            margin: 5px 0 20px 0;
         }
-
         .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 15px;
+            justify-content: center;
+            max-width: 800px;
+            margin: 20px auto;
         }
-
         .card {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 260px;
+            width: 250px;
             border: 3px solid black;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-
-        .card-content {
+            background-color: white;
+            padding: 10px;
+            margin: 10px;
             text-align: left;
-            flex: 1;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
         }
-
-        .card p {
-            margin: 2px 0;
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto;
         }
-
-        .card img {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            border: 1px solid #000;
-        }
-
-        @media(max-width: 600px) {
+        @media (max-width: 600px) {
             .card {
-                width: 90%;
+                width: 100%;
             }
         }
     </style>
 </head>
-
 <body>
 
     <h1>ABC Colleges</h1>
-    <h2>Library users</h2>
+    <h2>Library Users</h2>
 
-    <div class="container" id="students-list"></div>
+    <div class="container" id="students-list"></div> 
 
     <script>
         function loadXML() {
             let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
+            xhttp.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                     displayData(this);
                 }
@@ -92,22 +78,20 @@
                 let course = students[i].getElementsByTagName("course")[0].textContent;
                 let yearLevel = students[i].getElementsByTagName("yearLevel")[0].textContent;
                 let section = students[i].getElementsByTagName("section")[0].textContent;
-                let adviser = students[i].getElementsByTagName("advisor")[0].textContent;
+                let advisor = students[i].getElementsByTagName("advisor")[0].textContent;
                 let schoolYear = students[i].getElementsByTagName("schoolYear")[0].textContent;
                 let picture = students[i].getElementsByTagName("picture")[0].textContent;
 
                 output += `
-                <div class="card">
-                    <div class="card-content">
+                    <div class="card">
+                        <img src="${picture}" alt="Student Picture">
                         <p><strong>Name:</strong> ${name}</p>
                         <p><strong>Course:</strong> ${course}</p>
                         <p><strong>Year Level / Section:</strong> ${yearLevel} / ${section}</p>
-                        <p><strong>Adviser:</strong> ${adviser}</p>
+                        <p><strong>Advisor:</strong> ${advisor}</p>
                         <p><strong>School Year:</strong> ${schoolYear}</p>
                     </div>
-                    <img src="${picture}" alt="Photo">
-                </div>
-            `;
+                `;
             }
 
             document.getElementById("students-list").innerHTML = output;
@@ -117,5 +101,4 @@
     </script>
 
 </body>
-
 </html>
